@@ -5,7 +5,7 @@
 
 import { useState, useCallback } from 'react';
 
-const API = '';  // empty = uses Vite proxy (same origin)
+const API = import.meta.env.VITE_API_URL || '';
 
 export function useGame() {
   const [board, setBoard]             = useState(Array(9).fill(null));

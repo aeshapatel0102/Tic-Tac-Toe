@@ -59,7 +59,8 @@ export default function AgentMonitor() {
 
   // Connect to SSE on mount
   useEffect(() => {
-    const es = new EventSource('/agent-stream');
+    const base = import.meta.env.VITE_API_URL || '';
+    const es = new EventSource(`${base}/agent-stream`);
     esSrc.current = es;
 
     es.onopen = () => {

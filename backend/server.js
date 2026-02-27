@@ -101,13 +101,18 @@ app.post('/reset', (req, res) => {
   }
 });
 
-// ── Start server ──────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log('\n' + '═'.repeat(50));
-  console.log('  Tic-Tac-Toe | Agent Swarm Backend');
-  console.log('═'.repeat(50));
-  console.log(`  Server  : ${SERVER_URL}`);
-  console.log(`  SSE     : ${SERVER_URL}/agent-stream`);
-  console.log(`  State   : ${SERVER_URL}/state`);
-  console.log('═'.repeat(50) + '\n');
-});
+// ── Start server (local only) ─────────────────────────────────
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log('\n' + '═'.repeat(50));
+    console.log('  Tic-Tac-Toe | Agent Swarm Backend');
+    console.log('═'.repeat(50));
+    console.log(`  Server  : ${SERVER_URL}`);
+    console.log(`  SSE     : ${SERVER_URL}/agent-stream`);
+    console.log(`  State   : ${SERVER_URL}/state`);
+    console.log('═'.repeat(50) + '\n');
+  });
+}
+
+// ── Export for Vercel serverless ──────────────────────────────
+module.exports = app;

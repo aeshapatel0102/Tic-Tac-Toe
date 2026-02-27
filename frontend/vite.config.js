@@ -1,15 +1,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+const BACKEND_URL = process.env.VITE_API_URL || 'http://localhost:3001';
+
 export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
     proxy: {
-      '/move':         'http://localhost:3001',
-      '/reset':        'http://localhost:3001',
-      '/state':        'http://localhost:3001',
-      '/agent-stream': 'http://localhost:3001',
+      '/move':         BACKEND_URL,
+      '/reset':        BACKEND_URL,
+      '/state':        BACKEND_URL,
+      '/agent-stream': BACKEND_URL,
     },
   },
 });

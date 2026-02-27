@@ -1,21 +1,11 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    },
-    {
-      "src": "backend/server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    { "src": "/move",         "dest": "backend/server.js" },
-    { "src": "/reset",        "dest": "backend/server.js" },
-    { "src": "/state",        "dest": "backend/server.js" },
-    { "src": "/agent-stream", "dest": "backend/server.js" },
-    { "src": "/(.*)",         "dest": "frontend/$1" }
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "rewrites": [
+    { "source": "/move",         "destination": "/api/index" },
+    { "source": "/reset",        "destination": "/api/index" },
+    { "source": "/state",        "destination": "/api/index" },
+    { "source": "/agent-stream", "destination": "/api/index" },
+    { "source": "/(.*)",         "destination": "/index.html" }
   ]
 }
